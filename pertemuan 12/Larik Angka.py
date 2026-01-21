@@ -9,7 +9,7 @@ MAKSANGKA = 10
 #subrutin menu pilihan 
 def MenuPilihan(Menu):
     print('\033[34m<<--MENU PILIHAN-->>\033[30m')
-    print('--------------------')
+    print('--------------------------')
     print('1. Isi Elemen Larik')
     print('2. Tambah Elemen Larik')
     print('3. Sisip Elemen Larik')
@@ -18,7 +18,6 @@ def MenuPilihan(Menu):
     print('0. Keluar Menu')
     Menu = int(input('Pilihan Anda? '))
     return Menu
-
 
 #subrutin mengisi elemen array angka
 def IsiAngka(Angka,BanyakData):
