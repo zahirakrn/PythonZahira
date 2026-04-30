@@ -5,7 +5,7 @@ import os
 
 #pendefinisian linked list 
 #1. membuat kelas untuk simpulnya 
-class Node:
+class Node: 
     def __init__(self,Info):
         self.Info = Info
         self.Next = None
