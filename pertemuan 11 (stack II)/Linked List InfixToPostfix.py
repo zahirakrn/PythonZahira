@@ -19,6 +19,7 @@ class Node:
 
 #1. kelas stack linked list
 class StackLinked:
+
     #method inisialisasi
     def __init__(self):
         self.Top = None
@@ -39,12 +40,6 @@ class StackLinked:
             Hapus = self.Top
             self.Top = self.Top.Next
             return Hapus.Info
-        return None
-
-    #method mengambil isi teratas stack
-    def Peek(self):
-        if not self.Kosong():
-            return self.Top.Info
         return None
 
 
@@ -102,11 +97,11 @@ class InfixToPostfix:
 
                 #cek prioritas operator
                 while(not self.Stack.Kosong()) and \
-                     (self.Stack.Peek() in self.Operator) and \
-                     (self.TingkatOpr(self.Stack.Peek()) >= self.TingkatOpr(self.Q[i])):
+                     (self.Stack.Top.Info in self.Operator) and \
+                     (self.TingkatOpr(self.Stack.Top.Info) >= self.TingkatOpr(self.Q[i])):
 
                     #pop dari stack lalu masukkan ke postfix
-                    self.P[j] = self.Stack.Peek()
+                    self.P[j] = self.Stack.Top.Info
                     j += 1
                     self.Stack.Pop()
 
@@ -117,9 +112,9 @@ class InfixToPostfix:
             else:
 
                 #pop sampai bertemu kurung buka
-                while(self.Stack.Peek() != '('):
+                while(self.Stack.Top.Info != '('):
 
-                    self.P[j] = self.Stack.Peek()
+                    self.P[j] = self.Stack.Top.Info
                     j += 1
                     self.Stack.Pop()
 
@@ -155,29 +150,30 @@ class HitungPostfix:
     #method menghitung postfix
     def Hitung(self,P,N):
 
-        #tambahkan sentinel
+        #tambahkan kurung tutup di sentinel P
         P[N] = ')'
 
-        #pindai postfix dari kiri ke kanan
+        #pindai simbol P dari kiri ke kanan sampai tanda kurung tutup
         j = 0
 
         while(P[j] != ')'):
 
-            #jika operand
+            #jika yang dipindai operand
             if(P[j] not in self.Operator):
 
-                #push ke stack
+                #push ke dalam stack
                 self.Stack.Push(P[j])
 
-            #jika operator
+            #jika yang dipindai operator
             else:
 
-                #ambil dua operand dari stack
+                #pop dua elemen stack
                 A = int(self.Stack.Pop())
                 B = int(self.Stack.Pop())
 
-                #lakukan operasi
+                #hitung dengan format B operator A
                 match(P[j]):
+
                     case '+':
                         Hasil = B + A
 
@@ -193,15 +189,15 @@ class HitungPostfix:
                     case '^':
                         Hasil = B ** A
 
-                #push hasil ke stack
+                #push hasil ke dalam stack
                 self.Stack.Push(Hasil)
 
             j += 1
 
-        #ambil hasil akhir
+        #pop isi stack simpan di var. Value
         Value = self.Stack.Pop()
 
-        #tampilkan hasil
+        #tampilkan isi Value
         print(f'Value = {Value}')
 
 
@@ -210,7 +206,7 @@ os.system('cls')
 
 Notasi = InfixToPostfix()
 
-#pengguna memasukkan ekspresi infix
+#pengguna memasukkan sebuah ekspresi infix(E)
 print('<-- PROGRAM MENGUBAH INFIX MENJADI POSTFIX -->')
 E = str(input('Ekspresi Infix (E) = '))
 
@@ -236,6 +232,6 @@ print()
 
 Notasi.TampilPostfix(N)
 
-#memanggil method menghitung postfix
+#memanggil method menghitung dalam keadaan postfix
 Hitung_Postfix = HitungPostfix()
 Hitung_Postfix.Hitung(Notasi.P,N)
