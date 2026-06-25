@@ -9,7 +9,7 @@ MAKSSIMBOL = 30
 
 #pendefinisian kelas
 
-#1. kelas node
+#0. kelas node
 class Node:
     #method inisialisasi node
     def __init__(self,Info):
