@@ -42,7 +42,6 @@ class StackLinked:
             return Hapus.Info
         return None
 
-
 #2. kelas untuk mengubah infix menjadi postfix
 class InfixToPostfix:
 
